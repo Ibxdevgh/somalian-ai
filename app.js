@@ -207,6 +207,9 @@ async function connectWallet() {
         walletAddress = response.publicKey.toString();
         walletConnected = true;
 
+        // Save to localStorage
+        localStorage.setItem('hoodtoly_wallet', walletAddress);
+
         // Update UI
         const shortAddr = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
         walletBtn.querySelector('.wallet-text').textContent = shortAddr;
@@ -441,18 +444,33 @@ function setupWalletButton() {
         }
     });
 
-    // Auto-connect if already authorized
-    if (window.solana?.isPhantom) {
+    // Check if we have a saved wallet address
+    const savedWallet = localStorage.getItem('hoodtoly_wallet');
+    
+    if (savedWallet && window.solana?.isPhantom) {
+        // Try to reconnect to the saved wallet
         window.solana.connect({ onlyIfTrusted: true })
             .then(response => {
-                walletAddress = response.publicKey.toString();
-                walletConnected = true;
-                const shortAddr = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
-                walletBtn.querySelector('.wallet-text').textContent = shortAddr;
-                walletBtn.classList.add('connected');
-                fetchTokenBalance().then(updatePosesUI);
+                const connectedAddr = response.publicKey.toString();
+                // Verify it's the same wallet
+                if (connectedAddr === savedWallet) {
+                    walletAddress = connectedAddr;
+                    walletConnected = true;
+                    const shortAddr = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
+                    walletBtn.querySelector('.wallet-text').textContent = shortAddr;
+                    walletBtn.classList.add('connected');
+                    fetchTokenBalance().then(updatePosesUI);
+                    console.log('Reconnected to saved wallet:', shortAddr);
+                } else {
+                    // Different wallet, clear saved
+                    localStorage.removeItem('hoodtoly_wallet');
+                }
             })
-            .catch(() => {});
+            .catch(() => {
+                // Can't auto-connect, but we remember the wallet
+                // Show as "click to reconnect"
+                console.log('Saved wallet found but needs manual reconnect');
+            });
     }
 }
 
@@ -467,6 +485,9 @@ async function disconnectWallet() {
     } catch (err) {
         console.error('Disconnect error:', err);
     }
+    
+    // Clear from localStorage
+    localStorage.removeItem('hoodtoly_wallet');
     
     // Reset state
     walletConnected = false;
