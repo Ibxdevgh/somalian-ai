@@ -883,7 +883,7 @@ function setupCopyCA() {
     const caElement = document.querySelector('.ca-address');
     if (caElement) {
         caElement.addEventListener('click', async () => {
-            const ca = '67Yv11swgsf9P73pwTwgrBEAsSnjSg3ocZ8KXWSspump';
+            const ca = 'HdkeKMNUx6BFPz612eQJtrRL1J5YyPRpqMBdZi94pump';
             try {
                 await navigator.clipboard.writeText(ca);
                 const original = caElement.textContent;
