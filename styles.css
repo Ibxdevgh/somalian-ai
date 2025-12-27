@@ -539,8 +539,8 @@ body {
     border: 1px solid rgba(153, 69, 255, 0.3);
     border-radius: 16px;
     padding: 32px;
-    max-width: 500px;
-    width: 100%;
+    max-width: 700px;
+    width: 95%;
     position: relative;
     animation: modalSlide 0.3s ease;
 }
@@ -567,15 +567,17 @@ body {
 }
 
 .metaverse-preview {
-    margin: -32px -32px 20px -32px;
+    margin: -32px -32px 24px -32px;
     border-radius: 16px 16px 0 0;
     overflow: hidden;
+    background: #0a0a15;
 }
 
 .metaverse-preview img {
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
+    object-position: center;
     display: block;
 }
 
