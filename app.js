@@ -430,12 +430,15 @@ function setupAudio() {
 // ============ WALLET BUTTON ============
 function setupWalletButton() {
     const walletBtn = document.getElementById('wallet-btn');
+    
     walletBtn.addEventListener('click', () => {
         if (walletConnected) {
-            // Already connected - could add disconnect logic here
-            return;
+            // Disconnect wallet
+            disconnectWallet();
+        } else {
+            // Connect wallet
+            connectWallet();
         }
-        connectWallet();
     });
 
     // Auto-connect if already authorized
@@ -451,6 +454,37 @@ function setupWalletButton() {
             })
             .catch(() => {});
     }
+}
+
+async function disconnectWallet() {
+    const walletBtn = document.getElementById('wallet-btn');
+    
+    try {
+        // Disconnect from Phantom
+        if (window.solana?.isPhantom) {
+            await window.solana.disconnect();
+        }
+    } catch (err) {
+        console.error('Disconnect error:', err);
+    }
+    
+    // Reset state
+    walletConnected = false;
+    walletAddress = null;
+    tokenBalance = 0;
+    
+    // Reset UI
+    walletBtn.querySelector('.wallet-text').textContent = 'CONNECT';
+    walletBtn.classList.remove('connected');
+    updateBalanceDisplay();
+    updatePosesUI();
+    
+    // Reset to default pose
+    if (currentPose !== 'default') {
+        switchPose('default');
+    }
+    
+    console.log('Wallet disconnected');
 }
 
 // ============ SHARE ============
