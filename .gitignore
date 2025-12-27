@@ -1,0 +1,13 @@
+# Environment variables (contains API keys)
+.env
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+

@@ -1,0 +1,14 @@
+{
+  "name": "hood-toly",
+  "version": "1.0.0",
+  "description": "3D AI character chat with Hood Toly - Solana's realest founder",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["solana", "3d", "avatar", "chat", "threejs"],
+  "author": "",
+  "license": "MIT"
+}
+
