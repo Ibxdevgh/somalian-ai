@@ -855,6 +855,29 @@ function setupShare() {
     });
 }
 
+// ============ METAVERSE MODAL ============
+function setupMetaverseModal() {
+    const btn = document.getElementById('metaverse-btn');
+    const modal = document.getElementById('metaverse-modal');
+    const closeBtn = document.getElementById('metaverse-close');
+
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => {
+        modal.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+}
+
 // ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
     init();
@@ -863,4 +886,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPoses();
     setupWalletButton();
     setupShare();
+    setupMetaverseModal();
 });

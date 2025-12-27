@@ -87,15 +87,11 @@
             
             <!-- Coming Soon -->
             <div class="coming-soon">
-                <h3>COMING SOON</h3>
-                <ul>
-                    <li>🎤 TOLY VOICE (AI Speech)</li>
-                    <li>🎮 TOLY GAMES</li>
-                    <li>🎁 DAILY AIRDROPS</li>
-                    <li>🏆 HOLDER LEADERBOARD</li>
-                    <li>🌍 TOLY METAVERSE</li>
-                    <li>📱 MOBILE APP</li>
-                </ul>
+                <button class="metaverse-btn" id="metaverse-btn">
+                    <span class="metaverse-icon">🌍</span>
+                    <span class="metaverse-text">TOLY METAVERSE</span>
+                    <span class="metaverse-tag">COMING SOON</span>
+                </button>
             </div>
         </aside>
 
@@ -114,6 +110,64 @@
         <button class="share-btn" id="share-btn">
             <span>📸 SHARE</span>
         </button>
+
+        <!-- Metaverse Modal -->
+        <div class="metaverse-modal" id="metaverse-modal">
+            <div class="metaverse-modal-content">
+                <button class="modal-close" id="metaverse-close">✕</button>
+                <div class="metaverse-header">
+                    <span class="metaverse-logo">🌍</span>
+                    <h2>TOLY METAVERSE</h2>
+                    <span class="coming-tag">COMING SOON</span>
+                </div>
+                <div class="metaverse-body">
+                    <p class="metaverse-intro">Enter the Hood Toly universe - a virtual world where $HOODTOLY holders become citizens.</p>
+                    
+                    <div class="metaverse-features">
+                        <div class="mv-feature">
+                            <span>🏠</span>
+                            <div>
+                                <h4>YOUR CRIB</h4>
+                                <p>Build and customize your virtual home. Flex your holdings with rare furniture and decorations.</p>
+                            </div>
+                        </div>
+                        <div class="mv-feature">
+                            <span>🎮</span>
+                            <div>
+                                <h4>MINI GAMES</h4>
+                                <p>Compete in arcade games to earn $HOODTOLY. Leaderboards, tournaments, and prizes.</p>
+                            </div>
+                        </div>
+                        <div class="mv-feature">
+                            <span>👥</span>
+                            <div>
+                                <h4>HANGOUT ZONES</h4>
+                                <p>Chill with other holders in virtual clubs, parks, and secret VIP areas for top holders.</p>
+                            </div>
+                        </div>
+                        <div class="mv-feature">
+                            <span>🛒</span>
+                            <div>
+                                <h4>MARKETPLACE</h4>
+                                <p>Trade exclusive skins, items, and virtual real estate using $HOODTOLY.</p>
+                            </div>
+                        </div>
+                        <div class="mv-feature">
+                            <span>🎭</span>
+                            <div>
+                                <h4>AVATAR UPGRADES</h4>
+                                <p>Unlock exclusive outfits, accessories, and animations for your Toly avatar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metaverse-cta">
+                        <p>Hold $HOODTOLY to secure your spot in the metaverse.</p>
+                        <a href="https://x.com/hoodtoly" target="_blank" class="follow-btn">FOLLOW FOR UPDATES</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Share Modal -->
         <div class="share-modal" id="share-modal">
