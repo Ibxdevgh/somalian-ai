@@ -1,7 +1,7 @@
 {
-  "name": "hood-toly",
+  "name": "somalian-ai",
   "version": "1.0.0",
-  "description": "3D AI character chat with Hood Toly - Solana's realest founder",
+  "description": "3D AI character chat with Somalian - a very legitimate businessman",
   "type": "module",
   "scripts": {
     "start": "node server.js",

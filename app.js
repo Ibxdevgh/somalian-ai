@@ -7,16 +7,15 @@ const TOKEN_MINT = "9UGfpeJQbmSwDW2ScGDmz5zT8ctX1yTAYzy6KYmfpump";
 const TOKEN_DECIMALS = 6;
 
 // Pose files - add your GLBs here
-// Total supply: 1B, Dev: 50M, Max tier: 5M
 const POSES = {
-    default: { file: 'hood_toly_1.glb', cost: 0, name: 'Default', icon: '🧍' },
-    zesty: { file: 'toly_zesty.glb', cost: 50000, name: 'ZESTY', icon: '😏' },
-    pump: { file: 'toly_up.glb', cost: 100000, name: 'PUMP THE SOL', icon: '📈' },
-    dancing: { file: 'toly_dancing.glb', cost: 250000, name: 'J WALKING', icon: '🕺' },
-    boxing: { file: 'toly_boxing.glb', cost: 500000, name: 'JAKE', icon: '🥊' },
-    strong: { file: 'toly_strong.glb', cost: 1000000, name: 'ARNOLD', icon: '💪' },
-    backflip: { file: 'toly_backflip.glb', cost: 5000000, name: 'SPEED', icon: '⚡' },
-    naked: { file: null, cost: 50000000, name: 'NAKED', icon: '😳', forbidden: true },
+    default: { file: 'somali.glb', cost: 0, name: 'COLD CALL', icon: '📞' },
+    zesty: { file: 'somali.glb', cost: 50000, name: 'IRS AGENT', icon: '🏛️' },
+    pump: { file: 'somali.glb', cost: 100000, name: 'MICROSOFT', icon: '💻' },
+    dancing: { file: 'somali.glb', cost: 250000, name: 'PRINCE', icon: '👑' },
+    boxing: { file: 'somali.glb', cost: 500000, name: 'LOTTERY', icon: '🎰' },
+    strong: { file: 'somali.glb', cost: 1000000, name: 'ROMANCE', icon: '💕' },
+    backflip: { file: 'somali.glb', cost: 5000000, name: 'BANK CEO', icon: '🏦' },
+    naked: { file: null, cost: 50000000, name: 'REAL JOB', icon: '💼', forbidden: true },
 };
 // ================================
 
@@ -59,23 +58,33 @@ function init() {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // Lights - BRIGHT for dark character on white background
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
-    const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+    const mainLight = new THREE.DirectionalLight(0xffffff, 2);
     mainLight.position.set(5, 5, 5);
     scene.add(mainLight);
 
-    // Green rim light from below
-    const rimLight = new THREE.PointLight(0x00ff88, 0.8, 10);
-    rimLight.position.set(0, 0, 2);
-    scene.add(rimLight);
+    // Front fill light
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    frontLight.position.set(0, 2, 5);
+    scene.add(frontLight);
 
-    // Purple accent light
-    const accentLight = new THREE.PointLight(0x9945ff, 0.4, 10);
-    accentLight.position.set(-3, 2, -2);
-    scene.add(accentLight);
+    // Left fill light
+    const leftLight = new THREE.PointLight(0xffffff, 1.2, 15);
+    leftLight.position.set(-4, 2, 2);
+    scene.add(leftLight);
+
+    // Right fill light  
+    const rightLight = new THREE.PointLight(0xffffff, 1.2, 15);
+    rightLight.position.set(4, 2, 2);
+    scene.add(rightLight);
+
+    // Bottom fill to reduce harsh shadows
+    const bottomLight = new THREE.PointLight(0xffffff, 0.8, 10);
+    bottomLight.position.set(0, -1, 3);
+    scene.add(bottomLight);
 
     // Ground plane with grid
     const gridHelper = new THREE.GridHelper(10, 20, 0x00ff88, 0x1a1a1a);
@@ -207,7 +216,7 @@ async function connectWallet() {
         walletConnected = true;
 
         // Save to localStorage
-        localStorage.setItem('hoodtoly_wallet', walletAddress);
+        localStorage.setItem('somalian_wallet', walletAddress);
 
         // Update UI
         const shortAddr = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
@@ -268,7 +277,7 @@ async function fetchTokenBalance() {
 function updateBalanceDisplay() {
     const balanceEl = document.getElementById('token-balance');
     if (balanceEl) {
-        balanceEl.textContent = `${tokenBalance.toLocaleString()} $HOODTOLY`;
+        balanceEl.textContent = `${tokenBalance.toLocaleString()} VICTIMS`;
     }
 }
 
@@ -283,16 +292,16 @@ function setupPoses() {
             const pose = POSES[poseId];
             const tolyMessage = document.getElementById('toly-message');
             
-            // Check if it's the forbidden pose (NAKED)
+            // Check if it's the forbidden pose (REAL JOB)
             if (pose?.forbidden) {
                 const funnyMessages = [
-                    "nah bro you wildin, keep it PG 😭",
-                    "ayo?? this a family friendly blockchain fam",
-                    "you really thought... nah we don't do that here",
-                    "50M tokens and you still can't see me naked, that's tough",
-                    "bruh even with all the $HOODTOLY in the world... no",
-                    "my lawyer said no",
-                    "sir this is a blockchain"
+                    "REAL JOB?? no no no I am professional scammer not worker",
+                    "sir real job is for people with no talent like you",
+                    "why would I get real job when grandma send me gift card",
+                    "real job is scam by government, my scam is honest work",
+                    "I tried real job once, they want me there EVERY DAY?? no thank you",
+                    "my uncle say real job is biggest scam of all",
+                    "sir I make more money in one phone call than real job pay in month"
                 ];
                 tolyMessage.textContent = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
                 return;
@@ -300,7 +309,7 @@ function setupPoses() {
             
             // Check if unlocked
             if (cost > 0 && tokenBalance < cost) {
-                tolyMessage.textContent = `you need ${cost.toLocaleString()} $HOODTOLY to unlock this pose fam`;
+                tolyMessage.textContent = `sir you need scam ${cost.toLocaleString()} more victim to unlock this, please do the needful`;
                 return;
             }
             
@@ -444,7 +453,7 @@ function setupWalletButton() {
     });
 
     // Check if we have a saved wallet address
-    const savedWallet = localStorage.getItem('hoodtoly_wallet');
+    const savedWallet = localStorage.getItem('somalian_wallet');
     
     if (savedWallet && window.solana?.isPhantom) {
         // Try to reconnect to the saved wallet
@@ -462,7 +471,7 @@ function setupWalletButton() {
                     console.log('Reconnected to saved wallet:', shortAddr);
                 } else {
                     // Different wallet, clear saved
-                    localStorage.removeItem('hoodtoly_wallet');
+                    localStorage.removeItem('somalian_wallet');
                 }
             })
             .catch(() => {
@@ -486,7 +495,7 @@ async function disconnectWallet() {
     }
     
     // Clear from localStorage
-    localStorage.removeItem('hoodtoly_wallet');
+    localStorage.removeItem('somalian_wallet');
     
     // Reset state
     walletConnected = false;
@@ -579,18 +588,18 @@ function setupShare() {
         ctx.fillRect(0, height - 120, width, 120);
 
         // Add branding
-        ctx.fillStyle = '#00ff88';
-        ctx.font = 'bold 44px "Permanent Marker", cursive';
+        ctx.fillStyle = '#ff3333';
+        ctx.font = 'bold 40px "VT323", monospace';
         ctx.textAlign = 'center';
         ctx.shadowColor = '#000';
         ctx.shadowBlur = 8;
-        ctx.fillText('HOOD TOLY', width / 2, height - 60);
+        ctx.fillText('⚠️ SOMALIAN ⚠️', width / 2, height - 55);
         ctx.shadowBlur = 0;
 
         // Add subtitle
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 13px "Space Mono", monospace';
-        ctx.fillText('@HOODTOLY  •  $HOODTOLY', width / 2, height - 25);
+        ctx.fillStyle = '#ffcc00';
+        ctx.font = 'bold 14px "Roboto Mono", monospace';
+        ctx.fillText('MICROSOFT TECH SUPPORT', width / 2, height - 25);
 
         // Current pose name
         const pose = POSES[currentPose];
@@ -827,7 +836,7 @@ function setupShare() {
             
             // Open Twitter after short delay
             setTimeout(() => {
-                const text = `check out my Hood Toly! 🔥\n\n$HOODTOLY @hoodtoly`;
+                const text = `hello my friend check out this very legitimate businessman 🔥\n\n@somalian_ai`;
                 const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
                 window.open(twitterUrl, '_blank');
                 
@@ -848,7 +857,7 @@ function setupShare() {
         if (!capturedImage) return;
         
         const link = document.createElement('a');
-        link.download = `hood-toly-${currentPose}.png`;
+        link.download = `somalian-${currentPose}.png`;
         link.href = capturedImage;
         link.click();
     });
