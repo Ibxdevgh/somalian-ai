@@ -277,7 +277,7 @@ async function fetchTokenBalance() {
 function updateBalanceDisplay() {
     const balanceEl = document.getElementById('token-balance');
     if (balanceEl) {
-        balanceEl.textContent = `${tokenBalance.toLocaleString()} TOKENS`;
+        balanceEl.textContent = `${tokenBalance.toLocaleString()} VICTIMS`;
     }
 }
 
@@ -309,7 +309,7 @@ function setupPoses() {
             
             // Check if unlocked
             if (cost > 0 && tokenBalance < cost) {
-                tolyMessage.textContent = `my friend you need ${cost.toLocaleString()} more token to unlock this, please do the needful`;
+                tolyMessage.textContent = `my friend you need ${cost.toLocaleString()} more victim to unlock this, please do the needful`;
                 return;
             }
             
